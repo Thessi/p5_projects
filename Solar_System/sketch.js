@@ -5,13 +5,20 @@ var drawColor = true;
 
 function setup() 
 {
-  cnv = createCanvas(windowHeight / 4 * 3, windowHeight / 4 * 3);
+  //cnv = createCanvas(windowHeight / 4 * 3, windowHeight / 4 * 3);
+  cnv = createCanvas(windowWidth, windowHeight);
+
+  //var x = windowWidth/2;
+  //var y = windowHeight/2;
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
+
+  cnv.parent("canvasDiv");
+
+  //cnv.position(x, y);
   frameRate(120);
   targetPos = createVector(width/2, height/2);
-  createWalker(40, 10);
+  createWalker(50, 10, 5);
 }
 
 function deleteAll()
@@ -35,22 +42,30 @@ function toggleColor()
 
 function newWalker()
 {
-  createWalker(parseInt(document.getElementById("distance").value), parseInt(document.getElementById("speed").value));
+  createWalker(parseInt($("#distance").val()), parseInt($("#speed").val()), parseInt($("#objectSize").val()));
 }
 
 function newRandomWalker()
 {
-  createWalker(round(random(-(width/2 - 10), width/2 - 10)), round(random(-30, 30)));
+  var distance = round(random(-(height/2), height/2));
+  var speed = round(random(-30, 30));
+  var objectSize = round(random(3, 15));
+
+  $("#distance").val(distance);
+  $("#speed").val(speed);
+  $("#objectSize").val(objectSize);
+
+  createWalker(distance, speed, objectSize);
 }
 
-function createWalker(distance, speed)
+function createWalker(distance, speed, objectSize)
 {
   if(isNaN(distance) || isNaN(speed))
     return;
   if(walkers.length >= 128)
     return;
   var walker = new Walker();
-  walker.init(distance, speed);
+  walker.init(distance, speed, objectSize);
   walkers.push(walker);
   updateObjectCounter();
 
@@ -68,7 +83,7 @@ function refreshList()
       color =  walkers[i].color[0] + ", " + walkers[i].color[1] + ", " + walkers[i].color[2];
     else
       color = "0, 0, 0,";
-    item = "<li style='color: rgb(" + color  + ")' onclick='deleteWalker(" + i + ")' id='walker" + i + "' >Object " + (i+1) + ": " + walkers[i].distance + "|" + walkers[i].speed + "</li>";
+    item = "<li style='color: rgb(" + color  + ")' onclick='deleteWalker(" + i + ")' id='walker" + i + "' >Object " + (i+1) + ": " + walkers[i].distance + "|" + walkers[i].speed + "|" + walkers[i].objectSize + "</li>";
     $("#walkerList").append(item);
   }
 }
@@ -105,10 +120,11 @@ function Walker()
   this.vel = createVector(0, 10);
   this.acc = createVector(0, 0);
   
-  this.init = function(distance, speed)
+  this.init = function(distance, speed, objectSize)
   {
     this.distance = distance; //just for read, isn't used for calculation
     this.speed = speed;       //just for read, isn't used for calculation
+    this.objectSize = objectSize;
     this.vel = createVector(0, speed);
     this.pos = createVector(targetPos.x - distance, targetPos.y);
     this.color[0] = round(random(0, 256));
@@ -130,6 +146,6 @@ function Walker()
       fill(this.color[0], this.color[1], this.color[2]);
     else
       fill(255);
-    ellipse(this.pos.x, this.pos.y, 5, 5);
+    ellipse(this.pos.x, this.pos.y, this.objectSize, this.objectSize);
   }
 }

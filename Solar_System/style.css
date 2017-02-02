@@ -2,13 +2,14 @@
 {
 	width: 50%;
 	float: left;
+	background: transparent;
 }
 
 #walkerListDiv
 {
-	/*width: 50%;*/
 	width: 300px;
 	float: right;
+	background: transparent;
 }
 
 li
@@ -20,4 +21,13 @@ li
 {
 	background: black;
 	color: white;
+}
+
+#canvasDiv
+{
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: -10;
 }

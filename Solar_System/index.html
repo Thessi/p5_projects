@@ -34,6 +34,10 @@
                 <td>Distance:</td>
                 <td><input type="text" id="distance" value="50" /></td>
             </tr>
+            <tr>
+                <td>Size:</td>
+                <td><input type="text" id="objectSize" value="5" /></td>
+            </tr>
         </table>
         <br/>
         <input type="button" value="Create" onclick="newWalker()"/>
@@ -43,6 +47,9 @@
         <input type="checkbox" onclick="toggleDraw()"/> Draw Path
         <br />
         <input type="checkbox" onclick="toggleColor()" checked/> Color
+    </div>
+
+    <div id="canvasDiv">
     </div>
 
   </body>
