@@ -6,11 +6,18 @@
 
 #walkerListDiv
 {
-	width: 50%;
+	/*width: 50%;*/
+	width: 300px;
 	float: right;
 }
 
 li
 {
 	cursor: crosshair;
+}
+
+*
+{
+	background: black;
+	color: white;
 }

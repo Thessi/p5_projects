@@ -5,8 +5,8 @@ var drawColor = true;
 
 function setup() 
 {
-  cnv = createCanvas(windowHeight / 3 * 2, windowHeight / 3 * 2);
-  var x = (20) / 2;
+  cnv = createCanvas(windowHeight / 4 * 3, windowHeight / 4 * 3);
+  var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
   cnv.position(x, y);
   frameRate(120);
@@ -68,7 +68,7 @@ function refreshList()
       color =  walkers[i].color[0] + ", " + walkers[i].color[1] + ", " + walkers[i].color[2];
     else
       color = "0, 0, 0,";
-    item = "<li style='color: rgb(" + color  + ")' onclick='deleteWalker(" + i + ")' id='walker" + i + "' >Object " + i + ": " + walkers[i].distance + "|" + walkers[i].speed + "</li>";
+    item = "<li style='color: rgb(" + color  + ")' onclick='deleteWalker(" + i + ")' id='walker" + i + "' >Object " + (i+1) + ": " + walkers[i].distance + "|" + walkers[i].speed + "</li>";
     $("#walkerList").append(item);
   }
 }
