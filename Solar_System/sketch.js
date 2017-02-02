@@ -83,9 +83,9 @@ function newRandomWalker()
 
 function createWalker(distance, speed, objectSize)
 {
-  if(isNaN(distance) || isNaN(speed))
+  if(isNaN(distance) || isNaN(speed) || isNaN(objectSize))
     return;
-  if(walkers.length >= 128)
+  if(walkers.length >= 128 || objectSize <= 0)
     return;
   var walker = new Walker();
   walker.init(distance, speed, objectSize);
