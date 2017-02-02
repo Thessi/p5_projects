@@ -1,0 +1,16 @@
+#mainDiv
+{
+	width: 50%;
+	float: left;
+}
+
+#walkerListDiv
+{
+	width: 50%;
+	float: right;
+}
+
+li
+{
+	cursor: crosshair;
+}
