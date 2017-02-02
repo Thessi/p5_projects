@@ -40,6 +40,15 @@ function toggleColor()
   refreshList();
 }
 
+function lockParameter(parameter)
+{
+  var obj = $("#" + parameter);
+  if(obj.attr("disabled") === "disabled")
+    obj.removeAttr("disabled");
+  else
+    obj.attr("disabled", "disabled");
+}
+
 function newWalker()
 {
   createWalker(parseInt($("#distance").val()), parseInt($("#speed").val()), parseInt($("#objectSize").val()));
@@ -47,9 +56,23 @@ function newWalker()
 
 function newRandomWalker()
 {
-  var distance = round(random(-(height/2), height/2));
-  var speed = round(random(-30, 30));
-  var objectSize = round(random(3, 15));
+  var distance;
+  var speed;
+  var objectSize;
+  if($("#distance").attr("disabled") == "disabled")
+    distance = parseInt($("#distance").val());
+  else
+    distance = round(random(-(height/2), height/2));
+
+  if($("#speed").attr("disabled") == "disabled")
+    speed = parseInt($("#speed").val());
+  else
+    speed = round(random(-30, 30));
+
+  if($("#objectSize").attr("disabled") == "disabled")
+    objectSize = parseInt($("#objectSize").val());
+  else
+    objectSize = round(random(3, 15));
 
   $("#distance").val(distance);
   $("#speed").val(speed);
